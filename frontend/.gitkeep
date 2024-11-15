@@ -1,0 +1,7 @@
+core/
+core/.gitkeep
+modules/
+modules/auth/
+modules/auth/.gitkeep
+modules/landing/
+modules/landing/.gitkeep
