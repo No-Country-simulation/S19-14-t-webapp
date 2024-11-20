@@ -68,7 +68,7 @@ export class User extends Model {
 
   @Column({
     type: DataType.STRING(45),
-    allowNull: false,
+    allowNull: true,
     unique: true,
   })
   phone: string;
@@ -90,4 +90,10 @@ export class User extends Model {
     allowNull: true,
   })
   last_seen: Date;
+
+  @Column({
+    type: DataType.STRING(100),
+    allowNull: true,
+  })
+  location: string;
 }

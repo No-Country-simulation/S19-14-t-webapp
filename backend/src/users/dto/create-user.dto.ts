@@ -94,7 +94,7 @@ export class CreateUserDto {
     example: true,
     description: "The user's active status",
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   is_active: boolean;
 
@@ -141,4 +141,13 @@ export class CreateUserDto {
   @IsOptional()
   @IsDateString()
   last_seen: Date;
+
+  @ApiProperty({
+    example: 'Capital Federal, Buenos Aires',
+    description: "The user's location",
+  })
+  @IsOptional()
+  @IsString()
+  @Length(1, 100)
+  location: string;
 }

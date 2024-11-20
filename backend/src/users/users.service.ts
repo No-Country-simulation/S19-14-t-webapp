@@ -19,6 +19,7 @@ export class UsersService {
       ...createUserDto,
       password: hashedPassword,
       role: createUserDto.role || 'CLIENT',
+      is_active: true,
     };
     return this.usersRepository.create(userData);
   }
