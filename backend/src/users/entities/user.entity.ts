@@ -5,13 +5,15 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from 'sequelize-typescript';
 import { Occupation } from 'src/ocupations/entities/occupation.entity';
+import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
 
 @Table
 export class User extends Model {
   @Column({
-    type: DataType.BIGINT,
+    type: DataType.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   })
@@ -108,4 +110,7 @@ export class User extends Model {
 
   @BelongsTo(() => Occupation)
   occupation: Occupation;
+
+  @HasMany(() => Portfolio)
+  portfolios: Portfolio[];
 }

@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { HashAdapter } from 'src/common/adapters/hash.adapter';
 import { Occupation } from 'src/ocupations/entities/occupation.entity';
+import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
 
 @Injectable()
 export class UsersService {
@@ -34,7 +35,7 @@ export class UsersService {
   findOne(id: number) {
     return this.usersRepository.findOne({
       where: { id },
-      include: [Occupation],
+      include: [Occupation, Portfolio],
     });
   }
 
