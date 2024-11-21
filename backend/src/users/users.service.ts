@@ -3,12 +3,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { HashAdapter } from 'src/common/adapters/hash.adapter';
+import { Occupation } from 'src/ocupations/entities/occupation.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @Inject('USER_REPOSITORY')
     private usersRepository: typeof User,
+    @Inject('OCCUPATION_REPOSITORY')
+    private occupationsRepository: typeof Occupation,
   ) {}
 
   create(createUserDto: CreateUserDto): Promise<User> {
@@ -25,11 +28,14 @@ export class UsersService {
   }
 
   findAll(): Promise<User[]> {
-    return this.usersRepository.findAll();
+    return this.usersRepository.findAll({ include: [Occupation] });
   }
 
   findOne(id: number) {
-    return this.usersRepository.findOne({ where: { id } });
+    return this.usersRepository.findOne({
+      where: { id },
+      include: [Occupation],
+    });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {

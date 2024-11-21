@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
+import { Occupation } from 'src/ocupations/entities/occupation.entity';
 
 @Table
 export class User extends Model {
@@ -47,11 +55,12 @@ export class User extends Model {
   })
   image: string;
 
+  @ForeignKey(() => Occupation)
   @Column({
-    type: DataType.STRING(50),
+    type: DataType.INTEGER,
     allowNull: true,
   })
-  occupation: string;
+  occupation_id: number;
 
   @Column({
     type: DataType.BOOLEAN,
@@ -96,4 +105,7 @@ export class User extends Model {
     allowNull: true,
   })
   location: string;
+
+  @BelongsTo(() => Occupation)
+  occupation: Occupation;
 }

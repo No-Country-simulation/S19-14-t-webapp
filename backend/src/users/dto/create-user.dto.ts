@@ -9,6 +9,7 @@ import {
   IsEnum,
   IsBoolean,
   IsDateString,
+  IsNumber,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -82,13 +83,12 @@ export class CreateUserDto {
   image: string;
 
   @ApiProperty({
-    example: 'Software Developer',
-    description: "The user's occupation",
+    example: '1 (occupation id)',
+    description: "The user's occupation id",
   })
   @IsOptional()
-  @IsString()
-  @Length(1, 50)
-  occupation: string;
+  @IsNumber()
+  occupation_id: number;
 
   @ApiProperty({
     example: true,
