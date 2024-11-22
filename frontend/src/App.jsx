@@ -1,5 +1,10 @@
-function App() {
-return;
-}
+import React from 'react'
+import Home from './modules/home/pages/home'
 
-export default App
+export default function App() {
+    return (
+        <div>
+            <Home/>            
+        </div>
+    )
+}

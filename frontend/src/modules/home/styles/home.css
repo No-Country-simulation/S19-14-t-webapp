@@ -1,0 +1,29 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.header-container {
+    background-image: url('../../../../public/images/header.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 40rem;
+}
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 50px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+@media (min-width: 1024px) {
+    .card-container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
