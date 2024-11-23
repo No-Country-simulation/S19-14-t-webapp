@@ -4,11 +4,17 @@ import { UsersController } from './users.controller';
 import { usersProviders } from './users.repository';
 import { DatabaseModule } from 'src/config/database.module';
 import { ocupationsProviders } from 'src/ocupations/occupations.repository';
+import { imagesProviders } from 'src/images/images.repository';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [UsersController],
-  providers: [UsersService, ...usersProviders, ...ocupationsProviders],
-  exports: [UsersService],
+  providers: [
+    UsersService,
+    ...usersProviders,
+    ...ocupationsProviders,
+    ...imagesProviders,
+  ],
+  exports: [UsersService, ...usersProviders],
 })
 export class UsersModule {}

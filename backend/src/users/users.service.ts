@@ -5,6 +5,7 @@ import { User } from './entities/user.entity';
 import { HashAdapter } from 'src/common/adapters/hash.adapter';
 import { Occupation } from 'src/ocupations/entities/occupation.entity';
 import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
+import { Image } from 'src/images/entities/image.entity';
 
 @Injectable()
 export class UsersService {
@@ -35,7 +36,7 @@ export class UsersService {
   findOne(id: number) {
     return this.usersRepository.findOne({
       where: { id },
-      include: [Occupation, Portfolio],
+      include: [Occupation, Portfolio, Image],
     });
   }
 

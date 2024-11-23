@@ -13,6 +13,7 @@ export class Occupation extends Model {
   @Column({
     type: DataType.STRING(100),
     allowNull: false,
+    unique: true,
   })
   name: string;
 

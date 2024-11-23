@@ -6,7 +6,9 @@ import {
   ForeignKey,
   BelongsTo,
   HasMany,
+  HasOne,
 } from 'sequelize-typescript';
+import { Image } from 'src/images/entities/image.entity';
 import { Occupation } from 'src/ocupations/entities/occupation.entity';
 import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
 
@@ -51,11 +53,12 @@ export class User extends Model {
   })
   role: string;
 
+  @ForeignKey(() => Image)
   @Column({
-    type: DataType.STRING(2000),
+    type: DataType.INTEGER,
     allowNull: true,
   })
-  image: string;
+  image_id: number;
 
   @ForeignKey(() => Occupation)
   @Column({
@@ -113,4 +116,7 @@ export class User extends Model {
 
   @HasMany(() => Portfolio)
   portfolios: Portfolio[];
+
+  @HasOne(() => Image)
+  image: Image;
 }

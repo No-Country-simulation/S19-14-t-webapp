@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreatePortfolioDto {
   @ApiProperty({
@@ -25,9 +31,10 @@ export class CreatePortfolioDto {
   date: Date;
 
   @ApiProperty({
-    example: 'https://example.com/image.jpg',
-    description: 'The image of the portfolio',
+    example: '1',
+    description: 'The image id of the portfolio',
   })
-  @IsString()
-  image: string;
+  @IsOptional()
+  @IsNumber()
+  image_id: number;
 }

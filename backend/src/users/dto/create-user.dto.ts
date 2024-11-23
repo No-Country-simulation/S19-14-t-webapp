@@ -74,16 +74,15 @@ export class CreateUserDto {
   role: string;
 
   @ApiProperty({
-    example: 'https://example.com/image.jpg',
-    description: "The user's profile image URL",
+    example: '1',
+    description: "The user's image id",
   })
   @IsOptional()
-  @IsString()
-  @Length(1, 2000)
-  image: string;
+  @IsNumber()
+  image_id: number;
 
   @ApiProperty({
-    example: '1 (occupation id)',
+    example: '1',
     description: "The user's occupation id",
   })
   @IsOptional()

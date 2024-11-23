@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { OccupationsModule } from './ocupations/occupations.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
+import { ImagesModule } from './images/images.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PortfoliosModule } from './portfolios/portfolios.module';
     AuthModule,
     OccupationsModule,
     PortfoliosModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -25,9 +25,8 @@ export class UpdateUserDto {
     description: "The user's profile image URL",
   })
   @IsOptional()
-  @IsString()
-  @Length(1, 2000)
-  image: string;
+  @IsNumber()
+  image_id: number;
 
   @ApiProperty({
     example: '1 (occupation id)',

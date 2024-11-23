@@ -3,9 +3,11 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasOne,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Image } from 'src/images/entities/image.entity';
 import { User } from 'src/users/entities/user.entity';
 
 @Table
@@ -36,10 +38,10 @@ export class Portfolio extends Model {
   date: Date;
 
   @Column({
-    type: DataType.STRING(2000),
+    type: DataType.INTEGER,
     allowNull: true,
   })
-  image: string;
+  image_id: number;
 
   @ForeignKey(() => User)
   @Column({
@@ -50,4 +52,7 @@ export class Portfolio extends Model {
 
   @BelongsTo(() => User)
   user: User;
+
+  @HasOne(() => Image)
+  image: Image;
 }

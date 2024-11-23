@@ -24,6 +24,7 @@ export class OccupationsService {
   }
 
   remove(id: number) {
-    return this.occupationsRepository.destroy({ where: { id } });
+    this.occupationsRepository.destroy({ where: { id } });
+    return 'El oficio de id ' + id + ' se eliminó correctamente';
   }
 }
