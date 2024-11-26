@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Inter;
+}
+
+:root {
+    --beige-dark1: #EFEADC;
+    --beige-light1: #FEF9ED;
+    --blue-sky: #A7D6EF;
+    --blue-dark: #2A9ED9;
+    --green-dark1: #9AB3AF;
+}
