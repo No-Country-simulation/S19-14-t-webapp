@@ -11,6 +11,7 @@ import {
 import { Image } from 'src/images/entities/image.entity';
 import { Occupation } from 'src/ocupations/entities/occupation.entity';
 import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
+import { Service } from 'src/services/entities/service.entity';
 
 @Table
 export class User extends Model {
@@ -119,4 +120,7 @@ export class User extends Model {
 
   @HasOne(() => Image)
   image: Image;
+
+  @HasMany(() => Service)
+  services: Service[];
 }

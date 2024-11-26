@@ -8,6 +8,7 @@ import {
   ForeignKey,
 } from 'sequelize-typescript';
 import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
+import { Service } from 'src/services/entities/service.entity';
 import { User } from 'src/users/entities/user.entity';
 
 @Table
@@ -45,6 +46,7 @@ export class Image extends Model {
   })
   portfolio_id: number;
 
+  @ForeignKey(() => Service)
   @Column({
     type: DataType.INTEGER,
     allowNull: true,
@@ -57,8 +59,8 @@ export class Image extends Model {
   @BelongsTo(() => Portfolio)
   portfolio: Portfolio;
 
-  /* @BelongsTo(() => Service)
-  service: Service; */
+  @BelongsTo(() => Service)
+  service: Service;
 
   @BeforeValidate
   static async validateSingleForeignKey(instance: Image) {

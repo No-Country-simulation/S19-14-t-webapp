@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ImagesController } from './images.controller';
 import { ImagesService } from './images.service';
 import { ConfigModule } from '@nestjs/config';
@@ -8,16 +8,25 @@ import { portfoliosProviders } from 'src/portfolios/portfolios.repository';
 import { UsersModule } from 'src/users/users.module';
 import { DatabaseModule } from 'src/config/database.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
+import { ServicesModule } from 'src/services/services.module';
+import { servicesProviders } from 'src/services/services.repository';
 
 @Module({
-  imports: [DatabaseModule, UsersModule, PortfoliosModule, ConfigModule],
+  imports: [
+    DatabaseModule,
+    UsersModule,
+    PortfoliosModule,
+    forwardRef(() => ServicesModule),
+    ConfigModule,
+  ],
   controllers: [ImagesController],
   providers: [
     ImagesService,
     ...imagesProviders,
     ...usersProviders,
     ...portfoliosProviders,
+    ...servicesProviders,
   ],
-  exports: [...imagesProviders],
+  exports: [...imagesProviders, ImagesService],
 })
 export class ImagesModule {}

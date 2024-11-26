@@ -67,7 +67,6 @@ export class CreateUserDto {
     description:
       "The user's role, which can be 'ADMIN', 'CLIENT', or 'SERVICE'",
   })
-  @IsNotEmpty()
   @IsEnum(['ADMIN', 'CLIENT', 'SERVICE'], {
     message: 'The role must be either ADMIN, CLIENT, or SERVICE',
   })

@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ValidationPipe,
+  NotFoundException,
+} from '@nestjs/common';
 import { ServicesService } from './services.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
@@ -7,28 +17,53 @@ import { UpdateServiceDto } from './dto/update-service.dto';
 export class ServicesController {
   constructor(private readonly servicesService: ServicesService) {}
 
-  @Post()
-  create(@Body() createServiceDto: CreateServiceDto) {
-    return this.servicesService.create(createServiceDto);
+  @Post(':id')
+  create(
+    @Param('id') id: string,
+    @Body(ValidationPipe) createServiceDto: CreateServiceDto,
+  ) {
+    const serviceData = {
+      ...createServiceDto,
+      userId: +id,
+    };
+    return this.servicesService.create(serviceData);
   }
 
-  @Get()
-  findAll() {
-    return this.servicesService.findAll();
+  @Get('all/:id')
+  findAll(@Param('id') id: string) {
+    return this.servicesService.findAllByUser(+id);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.servicesService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const service = await this.servicesService.findOne(+id);
+    if (!service) {
+      throw new NotFoundException('Servicio no encontrado');
+    }
+    return service;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
-    return this.servicesService.update(+id, updateServiceDto);
+  async update(
+    @Param('id') id: string,
+    @Body(ValidationPipe) updateServiceDto: UpdateServiceDto,
+  ) {
+    const service = await this.servicesService.findOne(+id);
+    if (!service) {
+      throw new NotFoundException('Servicio no encontrado');
+    }
+
+    this.servicesService.update(+id, updateServiceDto);
+    return 'Servicio con el id: ' + id + ' actualizado correctamente';
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.servicesService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const service = await this.servicesService.findOne(+id);
+    if (!service) {
+      throw new NotFoundException('Servicio no encontrado');
+    }
+    this.servicesService.remove(+id);
+    return 'Servicio con el id: ' + id + ' eliminado correctamente';
   }
 }

@@ -6,6 +6,7 @@ import { HashAdapter } from 'src/common/adapters/hash.adapter';
 import { Occupation } from 'src/ocupations/entities/occupation.entity';
 import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
 import { Image } from 'src/images/entities/image.entity';
+import { Service } from 'src/services/entities/service.entity';
 
 @Injectable()
 export class UsersService {
@@ -30,13 +31,13 @@ export class UsersService {
   }
 
   findAll(): Promise<User[]> {
-    return this.usersRepository.findAll({ include: [Occupation] });
+    return this.usersRepository.findAll({ include: [Occupation, Image] });
   }
 
   findOne(id: number) {
     return this.usersRepository.findOne({
       where: { id },
-      include: [Occupation, Portfolio, Image],
+      include: [Occupation, Portfolio, Image, Service],
     });
   }
 

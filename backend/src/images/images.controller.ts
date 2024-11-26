@@ -8,8 +8,9 @@ import {
   Delete,
   ParseFilePipeBuilder,
   HttpStatus,
+  UploadedFiles,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ImagesService } from './images.service';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import { v2 as cloudinary } from 'cloudinary';
@@ -32,16 +33,9 @@ export class ImagesController {
   async uploadUserImage(
     @Param('id') id: string,
     @UploadedFile(
-      new ParseFilePipeBuilder()
-        .addFileTypeValidator({
-          fileType: /\.(jpeg|jpg|png)$/, // or /\.(png|jpg|gif|svg|pdf|doc|docx|xls|xlsx|ppt|pptx)$/
-        })
-        .addMaxSizeValidator({
-          maxSize: 1000,
-        })
-        .build({
-          errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
-        }),
+      new ParseFilePipeBuilder().build({
+        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      }),
     )
     file: Express.Multer.File,
   ) {
@@ -67,10 +61,22 @@ export class ImagesController {
   }
 
   @Post('services/:id')
-  @UseInterceptors(FileInterceptor('file', { storage }))
-  async uploadMultipleFiles(@UploadedFile() files: Express.Multer.File[]) {
-    const images = files.map((file) => file.path);
-    return { images };
+  @UseInterceptors(FilesInterceptor('files', 6, { storage }))
+  async uploadMultipleFiles(
+    @Param('id') id: string,
+    @UploadedFiles() files: Express.Multer.File[],
+  ) {
+    files.map(async (file) => {
+      return await this.imagesService.saveServiceImage(
+        id,
+        file.path,
+        file.filename,
+      );
+    });
+    return {
+      images: files.map((file) => file.path),
+      message: 'Images uploaded successfully',
+    };
   }
 
   @Get(':publicId')

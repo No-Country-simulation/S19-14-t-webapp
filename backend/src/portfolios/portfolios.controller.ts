@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ValidationPipe,
 } from '@nestjs/common';
 import { PortfoliosService } from './portfolios.service';
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
@@ -18,7 +19,7 @@ export class PortfoliosController {
   @Post(':id')
   create(
     @Param('id') id: string,
-    @Body() createPortfolioDto: CreatePortfolioDto,
+    @Body(ValidationPipe) createPortfolioDto: CreatePortfolioDto,
   ) {
     const portfolioData = {
       ...createPortfolioDto,
@@ -29,7 +30,7 @@ export class PortfoliosController {
 
   @Get('all/:id')
   findAllByUser(@Param('id') id: string) {
-    return this.portfoliosService.findAllByUser(Number(id));
+    return this.portfoliosService.findAllByUser(+id);
   }
 
   @Get(':id')
@@ -40,7 +41,7 @@ export class PortfoliosController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updatePortfolioDto: UpdatePortfolioDto,
+    @Body(ValidationPipe) updatePortfolioDto: UpdatePortfolioDto,
   ) {
     return this.portfoliosService.update(+id, updatePortfolioDto);
   }

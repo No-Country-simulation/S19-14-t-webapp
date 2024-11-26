@@ -4,12 +4,14 @@ import {
   HttpStatus,
   NotFoundException,
   Inject,
+  forwardRef,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v2 as cloudinary } from 'cloudinary';
 import { UsersService } from 'src/users/users.service';
 import { Image } from './entities/image.entity';
 import { PortfoliosService } from 'src/portfolios/portfolios.service';
+import { ServicesService } from 'src/services/services.service';
 
 @Injectable()
 export class ImagesService {
@@ -17,6 +19,8 @@ export class ImagesService {
     private configService: ConfigService,
     private userService: UsersService,
     private portfolioService: PortfoliosService,
+    @Inject(forwardRef(() => ServicesService))
+    private servicesService: ServicesService,
     @Inject('IMAGE_REPOSITORY')
     private readonly imageRepository: typeof Image,
   ) {
@@ -47,6 +51,7 @@ export class ImagesService {
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
+    await this.imageRepository.destroy({ where: { public_id: publicId } });
   }
 
   async saveUserImage(
@@ -110,5 +115,25 @@ export class ImagesService {
     };
 
     await this.portfolioService.update(+portfolioId, newPortfolio);
+  }
+
+  async saveServiceImage(
+    serviceId: string,
+    filePath: string,
+    fileName: string,
+  ): Promise<void> {
+    const service = await this.servicesService.findOne(+serviceId);
+
+    if (!service) {
+      throw new NotFoundException('Service not found');
+    }
+
+    const publicId = fileName.split('/')[1];
+
+    await this.imageRepository.create({
+      imageUrl: filePath,
+      service_id: +serviceId,
+      public_id: publicId,
+    });
   }
 }
