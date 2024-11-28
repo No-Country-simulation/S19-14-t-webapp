@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import logo from "../../../../public/images/logo.png";
 import styles from "../styles/registro.module.css";

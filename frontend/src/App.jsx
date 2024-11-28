@@ -1,11 +1,12 @@
-import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from './modules/home/pages/home'
+import Home from './modules/home/pages/Home'
 import Registro from './modules/auth/pages/Registro';
+import { Footer } from "./core/components/Footer";
 
 
 export default function App() {
     return (
+      <>
       <Router>
         <Routes>
             <Route path="/" element={<Home/>} />
@@ -13,5 +14,7 @@ export default function App() {
 
         </Routes>
       </Router>
+      <Footer />
+      </>
     )
 }
