@@ -1,0 +1,29 @@
+.buscar-servicio {
+    min-height: 768px;
+    background: #FFFBF0;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buscar-servicio-title {
+    font-weight: 900;
+    font-size: 36px;
+}
+
+.buscar-servicio-btn {
+    background: #A7D6EF;
+    text-decoration: none;
+    color: black;
+    box-shadow: 4px 4px 10px 0px #00000040;
+    padding: 24px 0;
+    width: 474px;
+    border-radius: 2rem;
+    font-size: 24px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
