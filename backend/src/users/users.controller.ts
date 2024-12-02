@@ -65,4 +65,9 @@ export class UsersController {
     }
     return this.usersService.remove(+id);
   }
+
+  @Get('/occupation/:name')
+  findByOccupation(@Param('name') name: string) {
+    return this.usersService.findByOccupation(name);
+  }
 }

@@ -4,6 +4,8 @@ import { UpdateServiceDto } from './dto/update-service.dto';
 import { Service } from './entities/service.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { ImagesService } from 'src/images/images.service';
+import { Op } from 'sequelize';
+import { Category } from 'src/categories/entities/category.entity';
 
 @Injectable()
 export class ServicesService {
@@ -30,7 +32,7 @@ export class ServicesService {
   findOne(id: number) {
     return this.serviceRepository.findOne({
       where: { id },
-      include: [Image],
+      include: [Image, Category],
     });
   }
 
@@ -52,5 +54,55 @@ export class ServicesService {
       );
     }
     return this.serviceRepository.destroy({ where: { id } });
+  }
+
+  findByKeyword(keyword: string) {
+    console.log('Keyword:', keyword);
+    return this.serviceRepository.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${keyword}%`,
+            },
+          },
+          {
+            summary: {
+              [Op.like]: `%${keyword}%`,
+            },
+          },
+          {
+            description: {
+              [Op.like]: `%${keyword}%`,
+            },
+          },
+        ],
+      },
+    });
+  }
+
+  findByAll(keyword: string, min: string, max: string) {
+    const whereClause: any = {
+      [Op.and]: [
+        {
+          [Op.or]: [
+            { title: { [Op.like]: `%${keyword}%` } },
+            { summary: { [Op.like]: `%${keyword}%` } },
+            { description: { [Op.like]: `%${keyword}%` } },
+            { '$category.name$': { [Op.like]: `%${keyword}%` } },
+          ],
+        },
+        {
+          price: {
+            [Op.between]: [+min || 0, +max || Number.MAX_VALUE],
+          },
+        },
+      ],
+    };
+
+    return this.serviceRepository.findAll({
+      include: [Category],
+      where: whereClause,
+    });
   }
 }

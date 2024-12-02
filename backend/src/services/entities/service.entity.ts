@@ -62,4 +62,7 @@ export class Service extends Model {
 
   @HasMany(() => Image)
   images: Image[];
+
+  @BelongsTo(() => Category)
+  category: Category;
 }

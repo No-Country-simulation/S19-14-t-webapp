@@ -68,4 +68,15 @@ export class UsersService {
   findByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne({ where: { email } });
   }
+
+  findByOccupation(occupation: string): Promise<User[]> {
+    return this.usersRepository.findAll({
+      include: [
+        {
+          model: Occupation,
+          where: { name: occupation },
+        },
+      ],
+    });
+  }
 }
