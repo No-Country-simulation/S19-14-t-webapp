@@ -7,6 +7,7 @@ import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
 import { Service } from 'src/services/entities/service.entity';
 import { User } from 'src/users/entities/user.entity';
 import * as dotenv from 'dotenv';
+import { Review } from 'src/reviews/entities/review.entity';
 dotenv.config();
 
 async function seedData() {
@@ -30,7 +31,15 @@ async function seedData() {
     logging: false,
   });
 
-  sequelize.addModels([User, Occupation, Portfolio, Image, Service, Category]);
+  sequelize.addModels([
+    User,
+    Occupation,
+    Portfolio,
+    Image,
+    Service,
+    Category,
+    Review,
+  ]);
 
   await sequelize.sync();
 
