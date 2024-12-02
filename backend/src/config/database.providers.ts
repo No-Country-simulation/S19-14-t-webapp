@@ -4,6 +4,7 @@ import { Category } from 'src/categories/entities/category.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { Occupation } from 'src/ocupations/entities/occupation.entity';
 import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
+import { Review } from 'src/reviews/entities/review.entity';
 import { Service } from 'src/services/entities/service.entity';
 import { User } from 'src/users/entities/user.entity';
 
@@ -34,6 +35,7 @@ export const databaseProviders = [
         Image,
         Service,
         Category,
+        Review,
       ]);
       await sequelize.sync();
       return sequelize;

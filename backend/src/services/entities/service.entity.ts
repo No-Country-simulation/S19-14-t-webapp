@@ -9,6 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { Category } from 'src/categories/entities/category.entity';
 import { Image } from 'src/images/entities/image.entity';
+import { Review } from 'src/reviews/entities/review.entity';
 import { User } from 'src/users/entities/user.entity';
 
 @Table
@@ -65,4 +66,7 @@ export class Service extends Model {
 
   @BelongsTo(() => Category)
   category: Category;
+
+  @HasMany(() => Review)
+  reviews: Review[];
 }

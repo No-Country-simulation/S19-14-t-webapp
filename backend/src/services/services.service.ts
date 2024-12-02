@@ -6,6 +6,8 @@ import { Image } from 'src/images/entities/image.entity';
 import { ImagesService } from 'src/images/images.service';
 import { Op } from 'sequelize';
 import { Category } from 'src/categories/entities/category.entity';
+import { Review } from 'src/reviews/entities/review.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class ServicesService {
@@ -32,7 +34,25 @@ export class ServicesService {
   findOne(id: number) {
     return this.serviceRepository.findOne({
       where: { id },
-      include: [Image, Category],
+      include: [
+        Image,
+        Category,
+        {
+          model: Review,
+          include: [
+            {
+              model: User,
+              attributes: ['name'],
+              include: [
+                {
+                  model: Image,
+                  attributes: ['imageUrl'],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     });
   }
 

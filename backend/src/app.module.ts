@@ -9,6 +9,7 @@ import { OccupationsModule } from './ocupations/occupations.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { ImagesModule } from './images/images.module';
 import { CategoriesModule } from './categories/categories.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CategoriesModule } from './categories/categories.module';
     PortfoliosModule,
     ImagesModule,
     CategoriesModule,
+    ReviewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
