@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { OccupationsModule } from './ocupations/occupations.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { ImagesModule } from './images/images.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ImagesModule } from './images/images.module';
     OccupationsModule,
     PortfoliosModule,
     ImagesModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

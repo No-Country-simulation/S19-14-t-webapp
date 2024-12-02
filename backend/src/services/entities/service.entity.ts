@@ -7,6 +7,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Category } from 'src/categories/entities/category.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { User } from 'src/users/entities/user.entity';
 
@@ -41,6 +42,13 @@ export class Service extends Model {
     allowNull: false,
   })
   price: number;
+
+  @ForeignKey(() => Category)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  categoryId: string;
 
   @ForeignKey(() => User)
   @Column({

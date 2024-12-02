@@ -1,5 +1,6 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Sequelize } from 'sequelize-typescript';
+import { Category } from 'src/categories/entities/category.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { Occupation } from 'src/ocupations/entities/occupation.entity';
 import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
@@ -26,7 +27,14 @@ export const databaseProviders = [
         password: connectionData.password,
         database: connectionData.database,
       });
-      sequelize.addModels([User, Occupation, Portfolio, Image, Service]);
+      sequelize.addModels([
+        User,
+        Occupation,
+        Portfolio,
+        Image,
+        Service,
+        Category,
+      ]);
       await sequelize.sync();
       return sequelize;
     },
