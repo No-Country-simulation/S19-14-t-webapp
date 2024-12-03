@@ -1,13 +1,10 @@
-import React from 'react'
+import React from 'react';
 import styles from '../styles/btnWhite.module.css';
 
-export default function BtnWhite({text}) {
-    const handlePress = () => {
-        console.log('Clic')
-    }
+export default function BtnWhite({ text, onClick }) {
     return (
-        <button onClick={handlePress} className={styles.button}>
+        <button type="button" onClick={onClick} className={styles.button}>
             {text}
         </button>
-    )
+    );
 }

@@ -99,7 +99,10 @@ function Login() {
                     <p id="notificacion" ref={notificacionRef}></p>
 
                     <BtnBlue text="Iniciar sesión" />
-                    <BtnWhite text="Registrarse" />
+                    <BtnWhite 
+                        text="Registrarse" 
+                        onClick={() => navigate("/registro")} 
+                    />
                 </form>
             </div>
         </div>
