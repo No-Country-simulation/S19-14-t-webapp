@@ -7,6 +7,7 @@ import { Occupation } from 'src/ocupations/entities/occupation.entity';
 import { Portfolio } from 'src/portfolios/entities/portfolio.entity';
 import { Image } from 'src/images/entities/image.entity';
 import { Service } from 'src/services/entities/service.entity';
+import { ChangePasswordDto } from './dto/change-password';
 
 @Injectable()
 export class UsersService {
@@ -78,5 +79,19 @@ export class UsersService {
         },
       ],
     });
+  }
+
+  async changePassword(id: number, password: ChangePasswordDto) {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    const hashAdapter = new HashAdapter();
+    const hashedPassword = hashAdapter.createHash(password.password, 10);
+    const newUserData = { ...user, password: hashedPassword };
+    await this.usersRepository.update(newUserData, { where: { id } });
+    return (
+      'La contraseña del usuario de id ' + id + ' se actualizó correctamente'
+    );
   }
 }

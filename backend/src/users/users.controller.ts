@@ -12,6 +12,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ChangePasswordDto } from './dto/change-password';
 
 @Controller('users')
 export class UsersController {
@@ -69,5 +70,18 @@ export class UsersController {
   @Get('/occupation/:name')
   findByOccupation(@Param('name') name: string) {
     return this.usersService.findByOccupation(name);
+  }
+
+  @Patch('change-password/:id')
+  changePassword(
+    @Param('id') id: string,
+    @Body(ValidationPipe) changePasswordDto: ChangePasswordDto,
+  ) {
+    const user = this.usersService.findOne(+id);
+    console.log(user);
+    if (!user) {
+      throw new NotFoundException('Usuario no encontrado');
+    }
+    return this.usersService.changePassword(+id, changePasswordDto);
   }
 }
