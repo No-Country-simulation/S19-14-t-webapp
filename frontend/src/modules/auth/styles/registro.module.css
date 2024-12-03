@@ -32,7 +32,7 @@ select {
     background: #FEF9ED;
 
 }
-
+/* 
 .btn_registrarse {
     border-radius: 16px;
     border: 4px solid #2A9ED9;
@@ -49,29 +49,31 @@ select {
     font-size: 23px;
     font-style: normal;
     font-weight: 400;
-    line-height: 32px;
-    /* 139.13% */
-}
+   
+} */
 
-.container_yaTienesUsuario{
+.container_yaTienesUsuario {
     color: #000;
     text-align: center;
     font-family: Inter;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
-    line-height: 25px; /* 166.667% */
+    line-height: 25px;
+    /* 166.667% */
 }
 h1 {
-    color: #000;
-    -webkit-text-stroke-width: 1;
-    -webkit-text-stroke-color: #000;
-    font-family: Inter;
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    color: #000; /* Color del texto */
+    font-size: 40px; /* Tamaño del texto */
+    font-style: normal; /* Sin cursiva */
+    font-weight: bold; /* Negrita */
+    line-height: normal; /* Espaciado normal */
+    text-shadow: 
+        0 0 5px #A0CFA2,  /* Sombra más amplia y brillante */
+        0 0 10px #A0CFA2, 
+        0 0 20px #A0CFA2; /* Sombra aún más visible */
 }
+
 
 .bienvenido {
     color: #000;
@@ -81,5 +83,6 @@ h1 {
     font-style: normal;
     font-weight: 700;
     line-height: 56px;
+
     /* 124.444% */
 }
