@@ -1,0 +1,23 @@
+.form-block {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.form-label {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.form-input {
+    background: #FAFAFA;
+    border: 1px solid #BDB6B6;
+    height: 54px;
+    border-radius: 3px;
+}
+
+.form-errorText {
+    color: red;
+    opacity: 0;
+    user-select: none;
+}
