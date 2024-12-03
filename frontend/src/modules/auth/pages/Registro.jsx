@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import logo from "../../../../public/images/logo.png";
 import styles from "../styles/registro.module.css";
+import BtnBlue from "../../../core/components/BtnBlue";
 
 function Registro() {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [newUser, setNewUser] = useState({
-        role: "CLIENT",
+        role: "",
         name: "",
         lastName: "",
         email: "",
@@ -27,20 +28,17 @@ function Registro() {
         e.preventDefault();
         setErrorMessage("");
 
-        if (newUser.password !== newUser.confirmarPassword) {
-            alert("Las contraseñas no coinciden");
+        if (!newUser.name || !newUser.lastName || !newUser.email || !newUser.password || !newUser.role) {
+            setErrorMessage("Por favor, completa todos los campos.");
             return;
         }
 
-        const userToSend = {
-            name: newUser.name,
-            lastName: newUser.lastName,
-            email: newUser.email,
-            password: newUser.password,
-            role: newUser.role,
-        };
+        if (newUser.password !== newUser.confirmarPassword) {
+            setErrorMessage("Las contraseñas no coinciden.");
+            return;
+        }
 
-        console.log("Usuario nuevo", userToSend);
+        const { confirmarPassword, ...userToSend } = newUser;
 
         setLoading(true);
 
@@ -50,10 +48,9 @@ function Registro() {
                 userToSend
             );
 
-            console.log(response.data);
             alert("Registro exitoso");
             setNewUser({
-                role: "CLIENT",
+                role: "",
                 name: "",
                 lastName: "",
                 email: "",
@@ -61,10 +58,9 @@ function Registro() {
                 confirmarPassword: "",
             });
         } catch (error) {
-            console.log(error);
             setErrorMessage(
                 "Hubo un error en el registro. " +
-                    (error.response?.data?.message || "Intenta de nuevo más tarde.")
+                (error.response?.data?.message || "Intenta de nuevo más tarde.")
             );
         } finally {
             setLoading(false);
@@ -93,7 +89,7 @@ function Registro() {
                         onChange={handleChange}
                         value={newUser.name}
                     />
-                     <input
+                    <input
                         type="text"
                         id="lastName"
                         name="lastName"
@@ -126,20 +122,21 @@ function Registro() {
                         value={newUser.confirmarPassword}
                     />
                     <select name="role" id="role" onChange={handleChange} value={newUser.role}>
+                        <option value="" disabled>
+                            Selecciona tu Rol
+                        </option>
                         <option value="CLIENT">Cliente</option>
-                        <option value="WORKER">Trabajador</option>
+                        <option value="SERVICE">Trabajador</option>
                     </select>
-                    <button className={styles.btn_registrarse} disabled={loading}>
-                        {loading ? "Registrando..." : "Registrarse"}
-                    </button>
-                </form>
-                {errorMessage && <p className={styles.error_message}>{errorMessage}</p>}
-            </div>
 
-            <div
-                className={styles.container_yaTienesUsuario}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingBottom: 50 }}
-            >
+                    {errorMessage && <p className={styles.error_message}>{errorMessage}</p>}
+
+                    <BtnBlue text={loading ? "Registrando..." : "Registrarse"} />
+                </form>
+
+
+            </div>
+            <div className={styles.container_yaTienesUsuario}>
                 <p>¿Ya tienes un usuario?</p>
                 <p style={{ textDecoration: "underline" }}>Iniciar sesión</p>
             </div>
