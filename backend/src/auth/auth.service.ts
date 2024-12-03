@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { HashAdapter } from 'src/common/adapters/hash.adapter';
 import { JwtService } from '@nestjs/jwt';
@@ -29,6 +33,8 @@ export class AuthService {
     input: AuthLoginRequest,
   ): Promise<AuthLoginReponse | null> {
     const user = await this.usersService.findByEmail(input.email);
+
+    if (!user) throw new NotFoundException('Usuario no encontrado');
 
     const hashAdapter = new HashAdapter();
     const isValidPassword = hashAdapter.verifyHash(
