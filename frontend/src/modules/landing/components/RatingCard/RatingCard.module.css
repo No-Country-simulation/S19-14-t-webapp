@@ -1,0 +1,75 @@
+.card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card:hover {
+    background: #fafafa;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+  }
+  
+  .profession {
+    font-size: 1rem;
+    color: #4a5568;
+  }
+  
+  .date {
+    font-size: 0.875rem;
+    color: #718096;
+  }
+  
+  .rateButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .rateButton:hover {
+    background-color: #2980b9;
+  }
+  
+  .rateButton:disabled {
+    background-color: #e2e8f0;
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
