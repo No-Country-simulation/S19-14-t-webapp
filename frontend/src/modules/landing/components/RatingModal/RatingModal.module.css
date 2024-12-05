@@ -1,34 +1,91 @@
-.container {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #1a202c;
-    margin-bottom: 2rem;
-  }
-  
-  .list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .emptyState {
-    text-align: center;
-    padding: 4rem 2rem;
-  }
-  
-  .emptyIcon {
-    color: #a0aec0;
-    margin-bottom: 1.5rem;
-  }
-  
-  .emptyText {
-    color: #4a5568;
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-  }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #718096;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 2rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.starButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #cbd5e1;
+  transition: color 0.2s;
+}
+
+.starButton:hover, .starButton.active {
+  color: #f59e0b;
+}
+
+.comment {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.submitButton {
+  width: 100%;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #2980b9;
+}
+
+.submitButton:disabled {
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
