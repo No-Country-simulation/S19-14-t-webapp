@@ -3,6 +3,7 @@ import Home from './modules/home/pages/Home'
 import Registro from './modules/auth/pages/Registro';
 import { Footer } from "./core/components/Footer";
 import { Landing } from "./modules/landing/pages/Landing";
+
 import Login from "./modules/auth/pages/Login";
 import { Navbar } from "./core/components/Navbar";
 
