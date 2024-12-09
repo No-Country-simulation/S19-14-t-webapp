@@ -1,12 +1,9 @@
 import React from 'react'
 import styles from '../styles/btnBlue.module.css';
 
-export default function BtnBlue({text}) {
-    const handlePress = () => {
-        console.log('Clic')
-    }
+export default function BtnBlue({text, onPress}) {
     return (
-        <button onClick={handlePress} className={styles.button}>
+        <button onClick={onPress} className={styles.button}>
             {text}
         </button>
     )

@@ -8,13 +8,15 @@ export default function CardFilter({filter}) {
         console.log('Filtrado por categoría')
     }
     return (
-        <button onClick={handleClic} className={styles['container']}>
-            <div className={styles['image-container']}>
-                <img src={image} alt="image Category" className={styles['image']}/>
-            </div>
-            <div className={styles['text-container']}>
-                <p className={styles['text']}>{category}</p>
-            </div>
-        </button>
+        <div className={styles['card-wrapper']}>
+            <button onClick={handleClic} className={styles['container']}>
+                <div className={styles['image-container']}>
+                    <img src={image} alt="image Category" className={styles['image']}/>
+                </div>
+                <div className={styles['text-container']}>
+                    <p className={styles['text']}>{category}</p>
+                </div>
+            </button>
+        </div>
     )
 }
