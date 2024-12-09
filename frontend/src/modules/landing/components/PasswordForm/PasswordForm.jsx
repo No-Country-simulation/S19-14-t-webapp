@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './PasswordForm.module.css';
 
 const PasswordForm = () => {
+  // Estado para almacenar los datos del formulario y los errores
   const [formData, setFormData] = useState({
     currentPassword: '',
     newPassword: '',
@@ -9,18 +10,21 @@ const PasswordForm = () => {
   });
   const [error, setError] = useState('');
 
+  // Maneja los cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
-    setError('');
+    setError(''); // Resetea el error al cambiar el campo
   };
 
+  // Maneja el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    // Validaciones
     if (formData.newPassword !== formData.confirmPassword) {
       setError('Las contraseñas no coinciden');
       return;
@@ -34,7 +38,7 @@ const PasswordForm = () => {
     // Aquí normalmente harías una llamada a la API para actualizar la contraseña
     console.log('Password update submitted:', formData);
     
-    // Resetear el formulario
+    // Resetea el formulario tras el envío exitoso
     setFormData({
       currentPassword: '',
       newPassword: '',

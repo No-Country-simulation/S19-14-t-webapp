@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
 import { Star, X } from 'lucide-react';
+import { addRating, getCurrentRatingsData } from '../../utils/ratingsService';
 import styles from './RatingModal.module.css';
 
-const RatingModal = ({ onClose, onSubmit, providerName }) => {
+const RatingModal = ({ onClose, onSubmit, providerName, providerId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(rating, comment);
+    
+    const newRating = addRating({
+      providerId,
+      rating,
+      comment,
+      userName: 'Usuario Actual' // En una aplicación real, esto vendría del sistema de autenticación
+    });
+
+    // Mostrar los datos actualizados en la consola
+    console.log('Datos actualizados después de la calificación:', getCurrentRatingsData());
+
+    onSubmit(newRating.rating, newRating.comment);
   };
 
   return (
