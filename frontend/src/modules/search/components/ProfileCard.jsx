@@ -1,19 +1,23 @@
+import PropTypes from "prop-types";
+
 import BtnBlue from "../../../core/components/BtnBlue";
 
 import styles from "../styles/profileCard.module.css";
 
-export const ProfileCard = () => {
+export const ProfileCard = ({ user }) => {
   return (
     <div className={styles.profile__card}>
-      <div className={styles.card__image}></div>
+      <div className={styles.card__image}>{user.image.imageUrl}</div>
       <div className={styles.card__info}>
         <div className={styles.info__header}>
           <div className={styles.header__tags}>
-            <h2 className={styles.tags__name}>Cosme Fulanito</h2>
-            <span className={styles.tags__job}>Los Simpsons</span>
+            <h2 className={styles.tags__name}>
+              {user.name} {user.lastName}
+            </h2>
+            <span className={styles.tags__job}>{user.occupation.name}</span>
           </div>
 
-          <p className={styles.header__ubication}>Avenida Siempreviva 742</p>
+          <p className={styles.header__ubication}>{user.location}</p>
         </div>
 
         <div className={styles.info__footer}>
@@ -26,4 +30,7 @@ export const ProfileCard = () => {
       </div>
     </div>
   );
+};
+ProfileCard.propTypes = {
+  user: PropTypes.object.isRequired,
 };
