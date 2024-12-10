@@ -4,6 +4,7 @@ import FormSearch from '../components/FormSearch';
 import CardFilter from '../components/CardFilter';
 import BtnBlue from '../../../core/components/BtnBlue';
 
+
 export default function Home() {
     const [showMore, setShowMore] = useState(false);
 
@@ -28,6 +29,8 @@ export default function Home() {
     const toggleShowMore = () => setShowMore(!showMore);
 
     const visibleFilters = showMore ? filters : filters.slice(0, 5);
+   
+   
 
     return (
         <div>

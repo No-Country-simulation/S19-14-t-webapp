@@ -1,0 +1,64 @@
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 2rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.emptyIcon {
+  color: #a0aec0;
+  margin-bottom: 1.5rem;
+}
+
+.emptyText {
+  color: #4a5568;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.averageRating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #f8fafc;
+  border-radius: 0.5rem;
+}
+
+.ratingLabel {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.stars {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.star {
+  transition: all 0.2s ease-in-out;
+}
+
+.ratingValue {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin-left: 0.25rem;
+}
