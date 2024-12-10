@@ -1,0 +1,64 @@
+.container_logo_titulo_login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container_oficiosYa_bienvenido_login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 287px;
+    height: 310px;
+    flex-shrink: 0;
+}
+
+.oficiosYa {
+    color: #000; 
+    font-size: 40px; 
+    font-style: normal; 
+    font-weight: bold;
+    line-height: normal;
+    text-shadow: 
+        0 0 5px #A0CFA2, 
+        0 0 10px #A0CFA2, 
+        0 0 20px #A0CFA2; 
+}
+
+.bienvenido {
+    color: #000;
+    text-align: center;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 56px;
+}
+
+.container_form_login {
+    display: flex;
+    justify-content: center;
+}
+
+
+.form_login {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+}
+
+.form_login input,
+select {
+    display: flex;
+    width: 549px;
+    padding: 8px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    border: 4px solid #E3DED2;
+    background: #FEF9ED;
+
+}
