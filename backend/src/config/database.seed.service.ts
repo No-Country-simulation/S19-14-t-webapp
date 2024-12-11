@@ -8,6 +8,7 @@ import { Service } from 'src/services/entities/service.entity';
 import { User } from 'src/users/entities/user.entity';
 import * as dotenv from 'dotenv';
 import { Review } from 'src/reviews/entities/review.entity';
+import { HashAdapter } from 'src/common/adapters/hash.adapter';
 dotenv.config();
 
 async function seedData() {
@@ -394,6 +395,88 @@ async function seedData() {
       },
     ]);
 
+    const occupations = await Occupation.findAll();
+
+    const realNames = [
+      'Carlos',
+      'Martin',
+      'Federico',
+      'Lucas',
+      'Diego',
+      'Santiago',
+      'Matias',
+      'Javier',
+      'Alejandro',
+      'Gonzalo',
+      'Pablo',
+      'Nicolas',
+      'Rodrigo',
+      'Mariano',
+      'Hernan',
+      'Gabriel',
+      'Fernando',
+      'Ricardo',
+      'Eduardo',
+      'Agustin',
+      'Sebastian',
+      'Ignacio',
+      'Facundo',
+      'Emiliano',
+    ];
+
+    const realLastNames = [
+      'Perez',
+      'Gomez',
+      'Lopez',
+      'Martinez',
+      'Fernandez',
+      'Ramirez',
+      'Sosa',
+      'Diaz',
+      'Alvarez',
+      'Torres',
+      'Ruiz',
+      'Flores',
+      'Acosta',
+      'Molina',
+      'Castro',
+      'Ortiz',
+      'Silva',
+      'Rojas',
+      'Morales',
+      'Herrera',
+      'Gutierrez',
+      'Pereyra',
+      'Mendez',
+      'Aguirre',
+      'Ponce',
+    ];
+
+    const usersWithRealNames = [];
+
+    occupations.forEach((occupation, index) => {
+      for (let i = 0; i < 5; i++) {
+        const name = realNames[(index * 5 + i) % realNames.length];
+        const lastName = realLastNames[(index * 5 + i) % realLastNames.length];
+        const hashAdapter = new HashAdapter();
+        const hashedPassword = hashAdapter.createHash('password123', 10);
+        const randomPhoneNumber = Math.floor(Math.random() * 1000000000);
+        usersWithRealNames.push({
+          name,
+          lastName,
+          email: `${name.toLowerCase()}.${lastName.toLowerCase()}@gmail.com`,
+          password: hashedPassword,
+          role: 'SERVICE',
+          image_id: 1,
+          is_active: true,
+          phone: randomPhoneNumber.toString(),
+          location: `Location${index + 1}`,
+          occupation_id: occupation.id,
+        });
+      }
+    });
+
+    await User.bulkCreate(usersWithRealNames);
     console.log('Seeding completado exitosamente.');
   } catch (error) {
     console.error('Error durante el seeding:', error);
