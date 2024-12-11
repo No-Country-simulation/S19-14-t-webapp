@@ -1,9 +1,9 @@
 import styles from '../styles/btnBlue.module.css';
 
-export default function BtnBlue({text, onPress}) {
+export default function BtnBlue({ text, onClick }) {
     return (
-        <button onClick={onPress} className={styles.button}>
+        <button onClick={onClick} className={styles.button}>
             {text}
         </button>
-    )
+    );
 }

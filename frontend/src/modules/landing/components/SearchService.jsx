@@ -1,5 +1,7 @@
 import { GuideCard } from './GuideCard'
 import styles from '../styles/searchService.module.css'
+import BtnBlue from '../../../core/components/BtnBlue'
+import { Link } from 'react-router-dom'
 
 export const SearchService = () => {
     return (
@@ -11,7 +13,8 @@ export const SearchService = () => {
             <GuideCard number={3} image="onboarding-card-3.png" tag="Registrate" description="Para contactar profesionales solo necesitas crear una cuenta. ¡Así garantizamos la seguridad de cada conexión!" />
             <GuideCard number={4} image="onboarding-card-4.png" tag="Confirmá el servicio" description="Iniciá un chat directo con el profesional seleccionado para coordinar una visita." />
             </div>
-            <a href="#" className={styles["buscar-servicio-btn"]}>Buscar un servicio</a>
+            <Link to={'/'}><BtnBlue text={'Buscar servicio'}/></Link>    
+            
         </section>
     )
 }

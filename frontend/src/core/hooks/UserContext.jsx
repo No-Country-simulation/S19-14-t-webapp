@@ -25,36 +25,40 @@ export const UserProvider = ({ children }) => {
     fetchUsers();
   }, []);
 
-  // Manejo de inicio de sesión
-  const handleLogin = (loggedInUser) => {
-    setUser(loggedInUser);
-    localStorage.setItem("user", JSON.stringify(loggedInUser));
-    setIsLoggedIn(true);
-  };
+   
+  
+    // Manejo de inicio de sesión
+    const handleLogin = (loggedInUser) => {
+        setUser(loggedInUser);
+        localStorage.setItem('user', JSON.stringify(loggedInUser));
+        setIsLoggedIn(true); 
+    };
 
-  // Cargar usuario desde localStorage
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      setUser(parsedUser);
-      setIsLoggedIn(true);
-    }
-    setIsLoading(false); // Marcar como cargado
-  }, []);
+    // Cargar usuario desde localStorage 
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const parsedUser = JSON.parse(storedUser);
+            setUser(parsedUser);
+            setIsLoggedIn(true);
+        }
+        setIsLoading(false); // Marcar como cargado
+    }, []);
 
-  // Manejo de cierre de sesión
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-    setIsLoggedIn(false);
-  };
+    // Manejo de cierre de sesión
+    const handleLogout = () => {
+        setUser(null);
+        localStorage.removeItem('user');
+        setIsLoggedIn(false); 
+    };
+   console.log("userCont", users);
+   
+    
 
-  return (
-    <UserContext.Provider
-      value={{ user, handleLogin, handleLogout, isLoggedIn, isLoading, users }}
-    >
-      {children}
-    </UserContext.Provider>
-  );
+    return (
+        <UserContext.Provider value={{ user, handleLogin, handleLogout, isLoggedIn, isLoading,users }}>
+            {children}
+        </UserContext.Provider>
+    );
+
 };
