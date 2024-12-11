@@ -2,12 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from './modules/home/pages/home'
 import Registro from './modules/auth/pages/Registro';
-import { Footer } from "./core/components/Footer";
-
-
 import { Search } from "./modules/search/pages/Search";
-
-
 import { Landing } from "./modules/landing/pages/Landing";
 import Login from "./modules/auth/pages/Login";
 import { Footer } from "./core/components/Footer";
@@ -27,7 +22,7 @@ export default function App() {
           <Route path="/profile" element={<Profilepage />} />
           <Route path="/nosotros" element={<Landing />} />
         </Routes>
-        <Footer />
+        <Footer/>
       </Router>
     </>
   );
