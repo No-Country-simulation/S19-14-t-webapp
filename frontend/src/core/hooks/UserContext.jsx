@@ -1,28 +1,30 @@
-import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [users, setUsers]= useState(null)
-    const [user, setUser] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoading, setIsLoading] = useState(true); // Para manejar el estado de carga
-  
-   const fetchUsers = async () => {
+  const [users, setUsers] = useState(null);
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Para manejar el estado de carga
+
+  const fetchUsers = async () => {
     try {
-      const response = await axios.get("https://oficiosya-api-production.up.railway.app/api/v1/users");
-      
-      setUsers(response.data); 
+      const response = await axios.get(
+        "https://oficiosya-api-production.up.railway.app/api/v1/users"
+      );
+
+      setUsers(response.data);
     } catch (error) {
       console.error("Error al obtener las usuarios:", error);
     }
   };
- 
+
   useEffect(() => {
     fetchUsers();
-   
   }, []);
+
    
   
     // Manejo de inicio de sesión
@@ -58,4 +60,5 @@ export const UserProvider = ({ children }) => {
             {children}
         </UserContext.Provider>
     );
+
 };
