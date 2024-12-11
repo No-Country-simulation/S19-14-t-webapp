@@ -1,18 +1,46 @@
-import styles from '../styles/navbar.module.css'
-import logo from '/images/logo.png'
+import styles from '../styles/navbar.module.css';
+import logo from '/images/logo.png';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { UserContext } from '../hooks/UserContext';
+import BtnBlue from './BtnBlue';
+import BtnWhite from './BtnWhite';
+
 
 export const Navbar = () => {
+    const { user, handleLogout } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const handleUserLogout = () => {
+        handleLogout();
+        navigate('/'); // Redirige al usuario después de cerrar sesión.
+    };
+
     return (
         <nav className={styles["navbar"]}>
             <div className={styles["navbar-nav"]}>
-                <a href="#" className={styles["nav-logo"]}><img src={logo} alt="logo"/> OficiosYa</a>
+                <a href="#" className={styles["nav-logo"]}>
+                    <img src={logo} alt="logo" /> OficiosYa
+                </a>
                 <ul className={styles["nav-items"]}>
-                    <li><a href="#" className={styles["nav-link"]}>Profesionales</a></li>
-                    <li><a href="#" className={styles["nav-link"]}>Sobre nosotros</a></li>
-                    <li><a href="#" className={styles["nav-button"]}>Iniciar sesión / Registrarse</a></li>
+
+                    <li><Link to={'/nosotros'}  className={styles["nav-link"]}>Sobre Nosotros</Link></li>
+                                      
+                    {user ? (
+                        <>
+                            <li className={styles["nav-link"]}>Hola, {user.name}</li>
+                            <li>
+                             <BtnBlue onClick={handleUserLogout} text={"Cerrar sesíon"}/>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li><Link to="/login" ><BtnBlue text={'Iniciar sesíon'}/></Link></li>
+                            <li><Link to="/registro" ><BtnWhite text={'Registrarse'}/></Link></li>
+                        </>
+                    )}
                 </ul>
             </div>
-            {/* <div className="navbar-menuBtn"></div> */}
-    </nav>
-    )
-}
+        </nav>
+    );
+};

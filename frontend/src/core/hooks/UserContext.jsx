@@ -49,6 +49,7 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem('user');
         setIsLoggedIn(false); 
     };
+   console.log("userCont", users);
    
     
 

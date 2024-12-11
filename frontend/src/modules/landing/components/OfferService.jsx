@@ -1,5 +1,7 @@
 import { GuideCard } from './GuideCard'
 import styles from '../styles/offerService.module.css'
+import BtnBlue from '../../../core/components/BtnBlue'
+import { Link } from 'react-router-dom'
 
 export const OfferService = () => {
     return (
@@ -12,7 +14,8 @@ export const OfferService = () => {
                 <GuideCard number={4} image="onboarding-card-8.png" tag="Expandí tus servicios" description="Respondé a los clientes, completá proyectos y recibí reseñas que fortalecerán tu perfil, atrayendo más clientes en el futuro." />
                 
             </div>
-            <a href="#" className={styles["ofrecer-servicio-btn"]}>Ofrecer un servicio</a>
+            <Link to={''}><BtnBlue  text={'Ofrecer un servicio'}/></Link>           
+          
         </section>
     )
 }

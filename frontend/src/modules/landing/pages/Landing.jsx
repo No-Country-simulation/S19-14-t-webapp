@@ -1,4 +1,3 @@
-import { Navbar } from '../../../core/components/Navbar'
 import { Hero } from '../components/Hero'
 import { SearchService } from '../components/SearchService'
 import { OfferService } from '../components/OfferService'
@@ -10,7 +9,6 @@ export const Landing = () => {
     return (
         <>
             <header>
-                <Navbar />
                 <Hero />
             </header>
             <main>
