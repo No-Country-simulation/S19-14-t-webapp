@@ -35,12 +35,12 @@ export default function Home() {
     return (
         <div>
             {/* ---------- Header */}
-            {/* <div className='header-image-container'>
+            <div className='header-image-container'>
                 <div style={{height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 20}}>
                     <p style={{textAlign: 'center', fontSize: 20, marginBottom: 20}}>“Encuentra al profesional adecuado para cada tarea en un solo clic”</p>
-                    <FormSearch/>
+                    {/* <FormSearch/> */}
                 </div>
-            </div> */}
+            </div>
 
             {/* ---------- Cards Filter */}
             <p style={{textAlign: 'center', paddingTop: 40, fontSize: 28, fontWeight: 600}}>Servicios</p>
