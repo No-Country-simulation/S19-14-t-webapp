@@ -12,6 +12,7 @@ import Profilepage from "./modules/landing/pages/ProfilePage/ProfilePage";
 import WorkerProfile from "./modules/landing/pages/WorkerProfile/WorkerProfile";
 import NewPublication from "./modules/landing/pages/WorkerProfile/NewPublication/NewPublication";
 import MyWorks from "./modules/landing/pages/WorkerProfile/MyWorks/MyWorks";
+import ServiciosPage from "./modules/servicios/ServiciosPage";
 
 export default function App() {
   return (
@@ -29,6 +30,8 @@ export default function App() {
           <Route path="/perfil-servicio" element={<WorkerProfile />} />
           <Route path="/new-publication" element={<NewPublication />} />
           <Route path="/my-works" element={<MyWorks />} />
+          <Route path="/profesionales/:id/servicios" element={<ServiciosPage />} />
+          
         </Routes>
         <Footer/>
       </Router>

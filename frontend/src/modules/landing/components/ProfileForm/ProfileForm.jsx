@@ -6,18 +6,16 @@ import styles from './ProfileForm.module.css';
 import axios from 'axios';
 import { UserContext } from '../../../../core/hooks/UserContext';
 
-
 const API_BASE_URL = 'https://oficiosya-api-production.up.railway.app/api/v1';
 
 const ProfileForm = () => {
   const { user } = useContext(UserContext);
   console.log("user", user);
-  
-
 
   const [formData, setFormData] = useState({
     name: '',
-    lastName:'',
+    lastName: '',
+    email: '',
     location: '',
     linkedin: '',
     social_media: ''
@@ -32,7 +30,8 @@ const ProfileForm = () => {
     if (profile) {
       setFormData({
         name: profile.name,
-        lastName: profile.lastName,  
+        lastName: profile.lastName,
+        email: profile.email,
         location: profile.location,
         linkedin: profile.linkedin,
         social_media: profile.social_media
@@ -59,22 +58,19 @@ const ProfileForm = () => {
     setSaveMessage('');
   
     try {
-
+      // Normalizar los datos: convertir cadenas vacías en null
+      const normalizedData = Object.fromEntries(
+        Object.entries(formData).map(([key, value]) => [key, value === '' || value === undefined ? null : value])
+      );
   
-      // Corregir datos si es necesario
-      const updatedData = {
-        ...formData,
-        email: formData.email || getProfile().email // Usar el valor actual del email del usuario si está vacío
-      };
-
-      console.log("useerid", user.id);
-      console.log("datos", updatedData);
-      
-      
   
-      await axios.patch(`${API_BASE_URL}/users/${user.id}`, updatedData);
+      console.log("userId", user.id);
+      console.log("datos normalizados", normalizedData);
   
-      // Si hay una nueva imagen, subirla
+      // Actualización del perfil
+      await axios.patch(`${API_BASE_URL}/users/${user.id}`, normalizedData);
+  
+      // Subida de la imagen
       if (imageFile) {
         const formDataForImage = new FormData();
         formDataForImage.append('file', imageFile);
@@ -95,10 +91,12 @@ const ProfileForm = () => {
       setIsSaving(false);
     }
   };
+  
+
   return (
     <div className={styles.profileForm}>
       <h1>Mi perfil</h1>
-      
+
       <div className={styles.avatarSection}>
         <ImageUpload 
           onImageChange={handleImageChange}
@@ -122,8 +120,8 @@ const ProfileForm = () => {
           </button>
         </div>
 
-        <div>
-        <input
+        <div className={styles.formGroup}>
+          <input
             type="text"
             name="lastName"
             value={formData.lastName}
@@ -132,10 +130,6 @@ const ProfileForm = () => {
             placeholder="Apellido"
           />
         </div>
-
-      
-
-
 
         <div className={styles.formGroup}>
           <input
@@ -155,11 +149,10 @@ const ProfileForm = () => {
             value={formData.linkedin}
             onChange={handleChange}
             className={styles.input}
-            placeholder="Linquedin"
+            placeholder="LinkedIn"
           />
         </div>
 
-        
         <div className={styles.formGroup}>
           <input
             type="text"
@@ -179,7 +172,6 @@ const ProfileForm = () => {
             onChange={handleChange}
             className={styles.input}
             placeholder="Ubicación"
-        
           />
         </div>
 
