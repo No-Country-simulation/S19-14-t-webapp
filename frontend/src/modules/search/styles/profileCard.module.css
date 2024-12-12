@@ -16,7 +16,9 @@
   width: 7.5rem;
 
   border-radius: 50%;
-  background-color: rebeccapurple;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   flex-shrink: 0;
 }
 
@@ -64,12 +66,8 @@
 
   display: flex;
   justify-content: space-between;
-
-  background-color: red;
 }
 
 .footer__stars {
   width: 200px;
-
-  background-color: yellow;
 }

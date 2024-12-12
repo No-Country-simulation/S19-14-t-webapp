@@ -1,0 +1,80 @@
+/* NewPublication.css */
+.new-publication-container {
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.new-publication-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.new-publication-container section {
+    margin-bottom: 15px;
+}
+
+.new-publication-container label {
+    font-weight: bold;
+}
+
+.new-publication-container input,
+.new-publication-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.new-publication-container .image-upload-section {
+    position: relative;
+}
+
+.new-publication-container .image-upload-section input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.new-publication-container label {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.new-publication-container .image-preview {
+    margin-top: 10px;
+}
+
+.new-publication-container .image-container {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.new-publication-container .preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.new-publication-container button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.new-publication-container button:hover {
+    background-color: #2980b9;
+}

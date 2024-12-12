@@ -1,19 +1,21 @@
-import styles from '../styles/navbar.module.css';
-import logo from '/images/logo.png';
-import { Link, useNavigate } from 'react-router-dom';
-import React, { useContext } from 'react';
-import { UserContext } from '../hooks/UserContext';
-import BtnBlue from './BtnBlue';
-import BtnWhite from './BtnWhite';
+
+import styles from "../styles/navbar.module.css";
+import logo from "/images/logo.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../hooks/UserContext";
+import BtnBlue from "./BtnBlue";
+import BtnWhite from "./BtnWhite";
 
 export const Navbar = () => {
-    const { user, handleLogout } = useContext(UserContext);
-    const navigate = useNavigate();
+  const { user, handleLogout } = useContext(UserContext);
+  const navigate = useNavigate();
 
-    const handleUserLogout = () => {
-        handleLogout();
-        navigate('/'); // Redirige al usuario después de cerrar sesión.
-    };
+  const handleUserLogout = () => {
+    handleLogout();
+    navigate("/"); // Redirige al usuario después de cerrar sesión.
+  };
+
 
     const handleProfileRedirect = () => {
         if (user?.role === 'CLIENT') {
@@ -53,4 +55,6 @@ export const Navbar = () => {
             </div>
         </nav>
     );
+
+
 };
