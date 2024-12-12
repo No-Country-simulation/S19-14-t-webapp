@@ -3,6 +3,8 @@ import styles from './ServiceCard.module.css';
 
 const ServiceCard = ({ service }) => {
   if (!service) return null; // Verificación adicional por seguridad.
+  console.log("ser", service);
+  
 
   return (
     <div className={styles["service-card"]}>

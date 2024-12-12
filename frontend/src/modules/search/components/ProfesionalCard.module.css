@@ -137,3 +137,26 @@ margin-bottom: 4px;
 .contactButton:hover {
   background-color: #2980b9;
 }
+
+.imageContainer {
+  position: relative; /* Necesario para posicionar el ícono correctamente */
+  display: inline-block;
+}
+
+.image {
+  width: 100%; /* Para que la imagen ocupe todo el espacio */
+  height: auto; /* Mantener la proporción */
+}
+
+.favoriteIcon {
+  position: absolute;
+  top: 15px; /* Posición en la parte superior */
+  right: 10px; /* Posición en la parte derecha */
+  background-color: white;  
+  padding: 2px;
+  cursor: pointer; /* Indicador de interacción */
+}
+
+.favorite {
+ border-color:solid 10px red;
+}
