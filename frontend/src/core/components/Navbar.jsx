@@ -20,6 +20,8 @@ export const Navbar = () => {
     const handleProfileRedirect = () => {
         if (user?.role === 'CLIENT') {
             navigate('/profile'); // Redirige a la página de perfil si el usuario es cliente.
+        }else{
+            navigate('/perfil-servicio')
         }
     };
 
