@@ -1,17 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Edit2 } from 'lucide-react';
 import ImageUpload from '../ImageUpload/ImageUpload';
 import { getProfile, updateProfile } from '../../utils/profileStorage';
 import styles from './ProfileForm.module.css';
+import axios from 'axios';
+import { UserContext } from '../../../../core/hooks/UserContext';
+
+
+const API_BASE_URL = 'https://oficiosya-api-production.up.railway.app/api/v1';
 
 const ProfileForm = () => {
+  const { user } = useContext(UserContext);
+  console.log("user", user);
+  
+
+
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    password: '',
+    lastName:'',
     location: '',
-    profession: '',
-    biography: ''
+    linkedin: '',
+    social_media: ''
   });
   const [imageFile, setImageFile] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
@@ -23,11 +32,10 @@ const ProfileForm = () => {
     if (profile) {
       setFormData({
         name: profile.name,
-        email: profile.email,
-        password: profile.password,
+        lastName: profile.lastName,  
         location: profile.location,
-        profession: profile.profession,
-        biography: profile.biography
+        linkedin: profile.linkedin,
+        social_media: profile.social_media
       });
       setSavedImage(profile.avatarUrl);
     }
@@ -49,19 +57,37 @@ const ProfileForm = () => {
     e.preventDefault();
     setIsSaving(true);
     setSaveMessage('');
-
+  
     try {
-      await updateProfile(formData, imageFile);
-      setSaveMessage('Perfil actualizado correctamente');
+
+  
+      // Corregir datos si es necesario
+      const updatedData = {
+        ...formData,
+        email: formData.email || getProfile().email // Usar el valor actual del email del usuario si está vacío
+      };
+
+      console.log("useerid", user.id);
+      console.log("datos", updatedData);
       
-      // Actualizar la imagen guardada si se subió una nueva
+      
+  
+      await axios.patch(`${API_BASE_URL}/users/${user.id}`, updatedData);
+  
+      // Si hay una nueva imagen, subirla
       if (imageFile) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setSavedImage(reader.result);
-        };
-        reader.readAsDataURL(imageFile);
+        const formDataForImage = new FormData();
+        formDataForImage.append('file', imageFile);
+  
+        await axios.post(`${API_BASE_URL}/images/users/${user.id}`, formDataForImage, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        console.log('Imagen subida correctamente');
       }
+  
+      setSaveMessage('Perfil actualizado correctamente');
     } catch (error) {
       setSaveMessage('Error al guardar los cambios');
       console.error('Error saving profile:', error);
@@ -69,7 +95,6 @@ const ProfileForm = () => {
       setIsSaving(false);
     }
   };
-
   return (
     <div className={styles.profileForm}>
       <h1>Mi perfil</h1>
@@ -90,13 +115,27 @@ const ProfileForm = () => {
             value={formData.name}
             onChange={handleChange}
             className={styles.input}
-            placeholder="Nombre completo"
-            required
+            placeholder="Nombre"
           />
           <button type="button" className={styles.editField}>
             <Edit2 size={16} />
           </button>
         </div>
+
+        <div>
+        <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            className={styles.input}
+            placeholder="Apellido"
+          />
+        </div>
+
+      
+
+
 
         <div className={styles.formGroup}>
           <input
@@ -106,30 +145,29 @@ const ProfileForm = () => {
             onChange={handleChange}
             className={styles.input}
             placeholder="Email"
-            required
           />
         </div>
-{/* 
-        <div className={styles.formGroup}>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className={styles.input}
-            placeholder="Contraseña"
-            required
-          />
-        </div> */}
 
         <div className={styles.formGroup}>
           <input
             type="text"
-            name="profession"
-            value={formData.profession}
+            name="linkedin"
+            value={formData.linkedin}
             onChange={handleChange}
             className={styles.input}
-            placeholder="Profesión"
+            placeholder="Linquedin"
+          />
+        </div>
+
+        
+        <div className={styles.formGroup}>
+          <input
+            type="text"
+            name="social_media"
+            value={formData.social_media}
+            onChange={handleChange}
+            className={styles.input}
+            placeholder="Facebook"
           />
         </div>
 
@@ -141,22 +179,9 @@ const ProfileForm = () => {
             onChange={handleChange}
             className={styles.input}
             placeholder="Ubicación"
-            required
+        
           />
         </div>
-
-        {/* <div className={styles.formGroup}>
-          <textarea
-            name="biography"
-            value={formData.biography}
-            onChange={handleChange}
-            className={styles.textarea}
-            placeholder="Biografía"
-          />
-          <button type="button" className={styles.editField}>
-            <Edit2 size={16} />
-          </button>
-        </div> */}
 
         {saveMessage && (
           <div className={`${styles.message} ${saveMessage.includes('Error') ? styles.error : styles.success}`}>

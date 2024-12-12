@@ -1,3 +1,4 @@
+
 import styles from "../styles/navbar.module.css";
 import logo from "/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,42 +16,45 @@ export const Navbar = () => {
     navigate("/"); // Redirige al usuario después de cerrar sesión.
   };
 
-  return (
-    <nav className={styles["navbar"]}>
-      <div className={styles["navbar-nav"]}>
-        <a href="#" className={styles["nav-logo"]}>
-          <img src={logo} alt="logo" /> OficiosYa
-        </a>
-        <ul className={styles["nav-items"]}>
-          <li>
-            <Link to={"/nosotros"} className={styles["nav-link"]}>
-              Sobre Nosotros
-            </Link>
-          </li>
 
-          {user ? (
-            <>
-              <li className={styles["nav-link"]}>Hola, {user.name}</li>
-              <li>
-                <BtnBlue onClick={handleUserLogout} text={"Cerrar sesíon"} />
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link to="/login">
-                  <BtnBlue text={"Iniciar sesíon"} />
-                </Link>
-              </li>
-              <li>
-                <Link to="/registro">
-                  <BtnWhite text={"Registrarse"} />
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </div>
-    </nav>
-  );
+    const handleProfileRedirect = () => {
+        if (user?.role === 'CLIENT') {
+            navigate('/profile'); // Redirige a la página de perfil si el usuario es cliente.
+        }
+    };
+
+    return (
+        <nav className={styles["navbar"]}>
+            <div className={styles["navbar-nav"]}>
+               
+                <Link to={'/'} className={styles["nav-logo"]}> <img src={logo} alt="logo" /> OficiosYa</Link>   
+                
+                <ul className={styles["nav-items"]}>
+                    <li><Link to={'/nosotros'} className={styles["nav-link"]}>Sobre Nosotros</Link></li>
+
+                    {user ? (
+                        <>
+                            <li 
+                                className={styles["nav-link"]} 
+                                onClick={handleProfileRedirect}
+                                style={{ cursor: 'pointer' }} // Hace que el texto sea clickeable.
+                            >
+                                Hola, {user.name}
+                            </li>
+                            <li>
+                                <BtnBlue onClick={handleUserLogout} text={"Cerrar sesión"} />
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li><Link to="/login"><BtnBlue text={'Iniciar sesión'} /></Link></li>
+                            <li><Link to="/registro"><BtnWhite text={'Registrarse'} /></Link></li>
+                        </>
+                    )}
+                </ul>
+            </div>
+        </nav>
+    );
+
+
 };

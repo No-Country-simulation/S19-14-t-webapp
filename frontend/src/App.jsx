@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "./modules/home/pages/home";
 import Registro from "./modules/auth/pages/Registro";
+
 import { Search } from "./modules/search/pages/Search";
 import { Landing } from "./modules/landing/pages/Landing";
 import Login from "./modules/auth/pages/Login";
@@ -29,7 +30,7 @@ export default function App() {
           <Route path="/new-publication" element={<NewPublication />} />
           <Route path="/my-works" element={<MyWorks />} />
         </Routes>
-        <Footer />
+        <Footer/>
       </Router>
     </>
   );
