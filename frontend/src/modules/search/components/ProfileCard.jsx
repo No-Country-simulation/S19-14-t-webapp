@@ -7,7 +7,13 @@ import styles from "../styles/profileCard.module.css";
 export const ProfileCard = ({ user }) => {
   return (
     <div className={styles.profile__card}>
-      <div className={styles.card__image}>{user.image.imageUrl}</div>
+      <div className={styles.card__image}>
+        {user.image ? (
+          <img src={user.image.imageUrl} alt="Profile" />
+        ) : (
+          <span>No image available</span>
+        )}
+      </div>
       <div className={styles.card__info}>
         <div className={styles.info__header}>
           <div className={styles.header__tags}>
@@ -31,6 +37,7 @@ export const ProfileCard = ({ user }) => {
     </div>
   );
 };
+
 ProfileCard.propTypes = {
   user: PropTypes.object.isRequired,
 };
