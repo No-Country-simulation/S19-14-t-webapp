@@ -27,7 +27,8 @@ export class ServicesService {
 
   findAllByUser(id: number) {
     return this.serviceRepository.findAll({
-      where: { user_id: id },
+      where: { userId: id },
+      include: [Image],
     });
   }
 
@@ -98,6 +99,7 @@ export class ServicesService {
           },
         ],
       },
+      include: [Image],
     });
   }
 
@@ -121,7 +123,7 @@ export class ServicesService {
     };
 
     return this.serviceRepository.findAll({
-      include: [Category],
+      include: [Category, Image],
       where: whereClause,
     });
   }
