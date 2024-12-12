@@ -1,0 +1,47 @@
+/* MyWorks.css */
+.my-works-container {
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.my-works-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.my-works-container .work-item {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.my-works-container .work-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.my-works-container .work-item .work-details {
+    flex-grow: 1;
+}
+
+.my-works-container button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.my-works-container button:hover {
+    background-color: #2980b9;
+}
